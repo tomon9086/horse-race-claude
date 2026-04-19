@@ -43,9 +43,9 @@ JRAの出走表とnetkeibaの過去成績データを組み合わせて競馬予
 
 #### 予想ファイルの保存
 
-`docs/plans/YYYYMMDD_<競馬場>_<R>R.md` に保存する。
+`docs/guesses/YYYYMMDD_<競馬場>_<R>R.md` に保存する。
 
-**ファイル名例**: `docs/plans/20260419_nakayama_11R.md`
+**ファイル名例**: `docs/guesses/20260419_nakayama_11R.md`
 
 **ファイルフォーマット**:
 
@@ -93,7 +93,7 @@ JRAの出走表とnetkeibaの過去成績データを組み合わせて競馬予
 
 レース結果を受け取ったら:
 
-1. 対応する `docs/plans/` のファイルを参照する
+1. 対応する `docs/guesses/` のファイルを参照する
 2. 以下の点を検証する:
    - 印の馬の着順（◎が何着か）
    - 予想外の馬が馬券に絡んだ理由
@@ -165,7 +165,7 @@ JRAの出走表とnetkeibaの過去成績データを組み合わせて競馬予
 ```
 docs/
   knowledge.md          # 汎用的な知見の蓄積（継続更新）
-  plans/
+  guesses/
     YYYYMMDD_<競馬場>_<R>R.md   # 予想ファイル
   results/
     YYYYMMDD_<競馬場>_<R>R.md   # 反省ファイル
