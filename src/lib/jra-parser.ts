@@ -1,13 +1,14 @@
 import * as cheerio from "cheerio";
+import type { Element } from "domhandler";
 import type { HorseEntry, PastRace, RaceInfo } from "./types.js";
 
-function parseWakuban(td: cheerio.Cheerio<cheerio.Element>, $: cheerio.CheerioAPI): number {
+function parseWakuban(td: cheerio.Cheerio<Element>, $: cheerio.CheerioAPI): number {
   const alt = td.find("img").attr("alt") ?? "";
   const match = alt.match(/枠(\d)/);
   return match ? parseInt(match[1], 10) : 0;
 }
 
-function parsePastRace(td: cheerio.Cheerio<cheerio.Element>, $: cheerio.CheerioAPI): PastRace | null {
+function parsePastRace(td: cheerio.Cheerio<Element>, $: cheerio.CheerioAPI): PastRace | null {
   const date = td.find(".date_line .date").text().trim();
   if (!date) return null;
 
