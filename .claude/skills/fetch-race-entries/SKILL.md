@@ -1,44 +1,32 @@
 ---
 name: fetch-race-entries
-description: "JRAの出走表を取得して構造化データとして出力する"
-argument-hint: "<JRA出馬表URL>"
+description: "netkeibaの出走表を取得して構造化データとして出力する"
+argument-hint: "<race_id (12桁)>"
 allowed-tools: ["Bash(npx tsx *)"]
 ---
 
 # 出走表取得スキル
 
-JRA公式サイトの出馬表URLを受け取り、出走馬の情報を構造化して出力します。
+netkeibaのrace_idを受け取り、出走馬の情報を構造化して出力します。
 
 ## 使い方
 
-1. ユーザからJRA出馬表のURLを受け取る
-2. URLが以下のいずれかのパターンに一致するか確認する:
-   - `https://www.jra.go.jp/keiba/g1/.+/syutsuba\.html`
-   - `https://www.jra.go.jp/keiba/thisweek/.+/horse\.html`
-   - `https?://(www\.)?jra\.go\.jp/JRADB/accessD\.html\?CNAME=.+` (JRADB出馬表URL)
-   - `https?://jra\.jp/JRADB/accessD\.html\?CNAME=.+` (JRADBショートURL)
-   - 一致しない場合は **コマンドを実行せず**、「出走表のURLではありません。JRAの出馬表URL（例: `https://www.jra.go.jp/JRADB/accessD.html?CNAME=...`）を指定してください。」とユーザにエラーを返して終了する
-3. `npx tsx src/fetch-entries.ts "$ARGUMENTS"` を実行する
+1. ユーザからrace_idを受け取る
+2. race_idが12桁の数字であることを確認する
+   - 一致しない場合は **コマンドを実行せず**、「race_idは12桁の数字で指定してください。（例: `202605021211`）」とユーザにエラーを返して終了する
+3. `npx tsx src/fetch-netkeiba-entries.ts "$ARGUMENTS"` を実行する
 4. 結果をそのまま出力する
 
-## URL構造ガイド
+## race_id の構造
 
-- G1レース: `https://www.jra.go.jp/keiba/g1/{レース名}/syutsuba.html`
-  - 皐月賞: satsuki, ダービー: derby, オークス: oaks, 宝塚記念: takarazuka
-  - 天皇賞春: tennoshospring, 天皇賞秋: tenshoautumn
-  - 有馬記念: arima, ジャパンカップ: japancup
-  - 桜花賞: ouka, NHKマイルC: nhk, 安田記念: yasuda
-  - スプリンターズS: sprinters, マイルCS: milecs
-  - 菊花賞: kikka, 秋華賞: shuka, エリザベス女王杯: elizabeth
-  - 阪神JF: hanshinJF, 朝日杯FS: asahiFS, ホープフルS: hopeful
-  - 中山大障害: nakayamagj, 中山グランドジャンプ: ngj
-  - フェブラリーS: february, チャンピオンズC: championscup
-  - 高松宮記念: takamatsunomiya, ヴィクトリアマイル: vm
+`YYYY + 会場コード(2桁) + 開催回(2桁) + 開催日(2桁) + レース番号(2桁)`
 
-- 今週のレース: `https://www.jra.go.jp/keiba/thisweek/{年}/{MMDD}_N/horse.html`
+例: `202605021211` = 2026年 / 東京(05) / 2回目の開催(02) / 12日目(12) / 11R(11)
 
-URLが分からない場合は、https://www.jra.go.jp/keiba/ からリンクを探すか、ユーザに確認してください。
+主な会場コード:
+- 01: 札幌, 02: 函館, 03: 福島, 04: 新潟, 05: 東京
+- 06: 中山, 07: 中京, 08: 京都, 09: 阪神, 10: 小倉
 
 ## 引数
 
-`$ARGUMENTS` にはJRAの出馬表URLが入ります。URLが指定されていない場合はユーザに確認してください。
+`$ARGUMENTS` にはnetkeibaのrace_idが入ります。指定されていない場合はユーザに確認してください。

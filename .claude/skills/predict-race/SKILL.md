@@ -11,7 +11,7 @@ allowed-tools: ["Bash(npx tsx *)"]
 
 ## 実行手順
 
-1. 会話内に出走表データがあればそれを使う。なければ `npx tsx src/fetch-entries.ts "$ARGUMENTS"` で取得する
+1. 会話内に出走表データがあればそれを使う。なければ `npx tsx src/fetch-netkeiba-entries.ts "$ARGUMENTS"` で取得する（`$ARGUMENTS` はrace_id: 12桁の数字）
 2. 以下の分析軸でデータを分析する
 3. 予想結果をフォーマットに従って出力する
 
